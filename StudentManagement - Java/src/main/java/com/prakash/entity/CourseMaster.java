@@ -19,27 +19,23 @@ public class CourseMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "courseSeq")
 	private Integer id;
-	private String courseName;
-
+	private String name;
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public String getCourseName() {
-		return courseName;
+	public String getName() {
+		return name;
 	}
-
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
+	public void setName(String name) {
+		this.name = name;
 	}
-
 	@Override
 	public String toString() {
-		return "CourseMaster [id=" + id + ", courseName=" + courseName + "]";
+		return "CourseMaster [id=" + id + ", name=" + name + "]";
 	}
+
 
 }
