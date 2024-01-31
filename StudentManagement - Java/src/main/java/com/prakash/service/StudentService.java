@@ -31,6 +31,7 @@ public class StudentService {
 		student.setDiscipline(updatableStudent.getDiscipline());
 		student.setGender(updatableStudent.getGender());
 		student.setCourses(updatableStudent.getCourses());
+		studentRepository.save(student);
 			
 		return student;
 	}
@@ -47,6 +48,10 @@ public class StudentService {
 		
 		allStudents = studentRepository.findAll();		
 		return allStudents;
+	}
+
+	public void deleteStudent(Integer studentId) {
+		studentRepository.deleteById(studentId);			
 	}
 
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Navbar, Container, Row, Col, Nav, Form } from "react-bootstrap";
+import { Button, Navbar, Container, Row, Col, Nav, Form, Toast } from "react-bootstrap";
 
 
 export default function StudentInput(){
@@ -8,6 +8,7 @@ export default function StudentInput(){
     const [student, setStudent] = useState(defaultStudent);
     const commonUrl = 'http://localhost:8080/api';
     const [isSubmit, setSubmit] = useState(false);
+    const [showToast, setShowToast] = useState(false);
 
     function setCourseValue(target){
         const name = target.name;
@@ -49,14 +50,16 @@ export default function StudentInput(){
         })
         .then(data => data.json())
         .then(res => {
+            setShowToast(true);
             console.log('response - ', res);
         })
         .catch(err => {
             console.error('error - ', err);
             alert(err);
         });
-
     }
+
+
     useEffect(() => {
         if(isSubmit){
             addStudentApiCall();
@@ -106,10 +109,14 @@ export default function StudentInput(){
                     </Col>
                 </Row>
                 <Row className="mt-3">
+                    {showToast}
                     <Button variant='warning' type="submit">Add Student</Button>
                 </Row>
 
             </Container>
         </Form>
+        <Toast show={showToast} onClose={() => setShowToast(false)} autohide delay={2000} style={{position: 'absolute',top: 0,right: 0, backgroundColor: '#28a745'}}>
+            <Toast.Body>You have created a Student Successfully!</Toast.Body>
+        </Toast>
     </div>;
 }
